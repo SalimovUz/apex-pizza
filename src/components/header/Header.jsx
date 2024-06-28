@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "@public/logo.jpg";
 import call from "@public/call.svg";
 import halal from "@public/halal.png";
@@ -6,11 +6,14 @@ import "../../App.css";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [foto, setFoto] = useState(true);
   const navigate = useNavigate();
+
   const moveProfile = () => {
     navigate("/profile");
   };
+
+  const avatarUrl = localStorage.getItem("avatarUrl");
+
   return (
     <div>
       <nav>
@@ -45,14 +48,14 @@ const Header = () => {
             <h4 className="font-bold text-[18px]"> СЕРТИФИКАТ ХАЛЯЛЪ</h4>
           </div>
 
-          {foto && (
-            <img onClick={moveProfile}
-              src={localStorage.getItem("avatarUrl")}
+          {avatarUrl ? (
+            <img
+              onClick={moveProfile}
+              src={avatarUrl}
               alt=""
               className="w-12 h-12 text-center cursor-pointer rounded-full"
             />
-          )}
-          {!foto && (
+          ) : (
             <h1
               onClick={moveProfile}
               className="text-[18px] bg-blue-950 rounded-full p-2 text-white w-11 h-10 text-center cursor-pointer"

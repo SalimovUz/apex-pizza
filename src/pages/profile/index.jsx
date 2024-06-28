@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import {
-  BsFillPersonFill,
   BsFillEnvelopeFill,
   BsFillTelephoneFill,
   BsFillShieldLockFill,
 } from "react-icons/bs";
 
 const Index = () => {
-  const [foto, setFoto] = useState(false);
+  const [foto, setFoto] = useState(true);
 
   const [userProfile, setUserProfile] = useState({
     name: "",
@@ -66,7 +65,7 @@ const Index = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen  p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg overflow-hidden">
         <div
           className="bg-cover bg-center h-56 p-4 relative"
@@ -90,15 +89,25 @@ const Index = () => {
         </div>
         <div className="p-4">
           <div className="flex flex-col items-center pb-4">
-            <img
-              className="h-24 w-24 rounded-full shadow-lg border-4 border-white -mt-12"
-              src={userProfile.avatarUrl}
-              alt="Profile"
-            />
-            <h1 className="text-2xl font-bold text-gray-800 mt-2">
-              {userProfile.name}
-            </h1>
-            <p className="text-gray-600">{userProfile.bio}</p>
+            {foto ? (
+              <img
+                className="h-24 w-24 rounded-full shadow-lg border-4 border-white -mt-12"
+                src={userProfile.avatarUrl}
+                alt="Profile"
+              />
+            ) : (
+              <h1
+                className="text-6xl font-bold text-white mt-2 bg-blue-950 rounded-full p-3 w-24 h-24 text-center cursor-pointer"
+                onClick={handleEditJob}
+              >
+                {localStorage.getItem("username")
+                  ? localStorage.getItem("username").charAt(0).toUpperCase()
+                  : ""}
+              </h1>
+            )}
+            <p className="text-gray-600 cursor-pointer" onClick={handleEditBio}>
+              {userProfile.bio}
+            </p>
             <div className="mt-2 flex items-center">
               <button
                 className="bg-blue-500 text-white px-3 py-1 text-sm font-semibold rounded-full hover:bg-blue-400"
